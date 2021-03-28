@@ -1,66 +1,7 @@
-
-class UserName {
-  public value: string
-
-  constructor(value) {
-
-    if (value === null) {
-      throw new Error('name is Required');
-    }
-
-    if (value.length < 4) {
-      throw new Error('name length must be at least 3 characters');
-    }
-
-    this.value = value
-  }
-
-}
-
-
-class UserId {
-  public value: string
-
-  constructor(value) {
-
-    if (value === null) {
-      throw new Error('id is Required');
-    }
-
-    this.value = value
-  }
-
-}
-
-
-class User {
-  public name: UserName
-  public id: UserId
-
-  constructor(name: UserName) {
-    this.name = name
-    this.id = new UserId(1)
-  }
-
-  get _name () { 
-    return this.name
-  }
-
-  get _id () { 
-    return this.id
-  }
-}
-
-class UserService {
-
-  constructor() {}
-
-  exists (user: User): boolean {
-    // return true
-    return false
-  }
-
-}
+import { User } from './entity/userEntity'
+import { UserName, UserId } from './valueObject/userValueObject'
+import { UserService } from './domainService/userService'
+import { userData } from './data/userData'
 
 class Program {
 
@@ -77,20 +18,29 @@ class Program {
       throw new Error('this user is aleady exists')
     }
 
-    console.log('user is created !!')
-    
+    userData.push({
+      id: user.id,
+      name: user.name
+    })
+
   }
 }
 
+// 基本的な使い方
 const beal = new User(new UserName('beal'))
 console.log(beal.name)
 console.log(beal.id)
 
-// const ja = new User('ja')
-// console.log(ja.name)
-// console.log(ja.id)
+// UserName は値オブジェクトであり、値は不変である
+// そのため、以下のような値を変更することは許されない
+let lopez = new UserName('lopez')
+// lopez.value = 'robin'
 
-// const userError = new User(null)
-// console.log(userError.name)
-// console.log(userError.id)
+// UserName は値オブジェクトであり、交換が可能である
+// そのため、値を変更する場合は交換によって変更する必要がある
+lopez = new UserName('robin')
+
+
+const program =  new Program()
+program.createUser('hachimura')
 
