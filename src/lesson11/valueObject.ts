@@ -1,4 +1,3 @@
-
 interface CircleIdInterface {
   _value: string
 }
@@ -6,6 +5,10 @@ interface CircleIdInterface {
 interface CircleNameInterface {
   _value: string
   equals(circleName: CircleName): boolean
+}
+
+interface UserInterface {
+  _value: string
 }
 
 class CircleId implements CircleIdInterface {
@@ -21,9 +24,7 @@ class CircleId implements CircleIdInterface {
 
   }
 
-  get value () {
-    return this._value
-  }
+  get value () { return this._value }
 
 }
 
@@ -46,16 +47,20 @@ class CircleName implements CircleNameInterface {
 
   }
 
-  get value () {
-    return this._value
-  }
+  get value () { return this._value }
 
   equals(circleName: CircleName): boolean
-  equals(circleName: string): boolean
-  equals(circleName: any): boolean {
-    if (circleName === null) return false
-    if (circleName === this) return true
-    return circleName.value === this._value
+  equals(circleId: CircleId): boolean
+  equals(circleValue: any): boolean {
+    if (circleValue === null) return false
+    if (circleValue === this) return true
+    return circleValue.value === this._value
   }
 
 }
+
+class User implements UserInterface {
+  public _value : string
+}
+
+export { CircleName, CircleId, User }

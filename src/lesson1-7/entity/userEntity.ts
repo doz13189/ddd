@@ -9,13 +9,9 @@ class User {
     this._name = name
   }
 
-  get id () {
-    return this._id.value
-  }
+  get id () { return this._id.value }
 
-  get name () { 
-    return this._name.value
-  }
+  get name () { return this._name.value }
 
   // changeName() {
   //   this._id = new UserId()
